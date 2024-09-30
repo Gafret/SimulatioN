@@ -1,4 +1,4 @@
 package Simulation.map;
 
-public interface Map {
+public class DefaultMap {
 }
