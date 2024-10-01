@@ -6,10 +6,12 @@ import Simulation.searchalgorithms.SearchAlgorithm;
 
 public class Carnivore extends Creature {
     protected int attackDamage;
+    protected int attackRadius;
 
-    public Carnivore(int health, int movementSpeed, int attackDamage){
+    public Carnivore(int health, int movementSpeed, int attackDamage, int attackRadius){
         super(health, movementSpeed);
         this.attackDamage = attackDamage;
+        this.attackRadius = attackRadius;
     }
 
     @Override
@@ -22,7 +24,4 @@ public class Carnivore extends Creature {
         return !prey.isAlive();
     }
 
-    private Coordinate2D findNearestPrey(SearchAlgorithm searchAlgorithm){
-        return searchAlgorithm.findClosest(Herbivore.class);
-    }
 }

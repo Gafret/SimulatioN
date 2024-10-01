@@ -2,6 +2,7 @@ package Simulation.entities.mobile.base;
 
 import Simulation.entities.base.Entity;
 import Simulation.map.Coordinate2D;
+import Simulation.map.Map;
 
 public abstract class Creature extends Entity {
     protected int healthPoints;
@@ -14,6 +15,17 @@ public abstract class Creature extends Entity {
 
     abstract public boolean makeMove();
 
+    protected boolean moveTo(Coordinate2D from, Coordinate2D to, Map map){
+        Entity entity = map.getEntity(from);
+        if(!(entity instanceof Creature) ||
+                map.getEntity(to) != null ||
+                from.getDistance(to) > movementSpeed)
+            return false;
+
+        map.removeEntity(from);
+        map.addEntity(entity, to);
+        return true;
+    }
     public boolean isAlive(){
         return healthPoints > 0;
     }

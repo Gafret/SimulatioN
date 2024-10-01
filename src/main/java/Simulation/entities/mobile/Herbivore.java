@@ -17,11 +17,4 @@ public class Herbivore extends Creature {
 
     }
 
-    private boolean consumeGrass(Grass grass){
-
-    }
-
-    private Coordinate2D findNearestGrass(SearchAlgorithm searchAlgorithm){
-        return searchAlgorithm.findClosest(Grass.class);
-    }
 }

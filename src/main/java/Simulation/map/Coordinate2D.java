@@ -11,13 +11,10 @@ public class Coordinate2D {
     public int getY() {
         return y;
     }
-    public void setX(int x) {
-        this.x = x;
-    }
-    public void setY(int y) {
-        this.y = y;
-    }
     public int[] getCoordinate() {
         return new int[] {x, y};
+    }
+    public float getDistance(Coordinate2D other) {
+        return (float) Math.sqrt(Math.pow(other.getX() - x, 2) + Math.pow(other.getY() - y, 2));
     }
 }
