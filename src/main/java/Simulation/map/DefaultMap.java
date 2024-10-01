@@ -15,6 +15,11 @@ public class DefaultMap implements Map {
     }
 
     @Override
+    public Entity getEntity(Coordinate2D coordinate) {
+        return map.get(coordinate);
+    }
+
+    @Override
     public boolean addEntity(Entity entity, Coordinate2D position) {
         if(!this.checkIsEmpty(position))
             return false;
@@ -38,16 +43,6 @@ public class DefaultMap implements Map {
     }
 
     @Override
-    public boolean moveEntity(Coordinate2D position, Coordinate2D destination) {
-        if(this.checkIsEmpty(position) || !this.checkIsEmpty(destination))
-            return false;
-        Entity entity = this.map.get(position);
-        this.removeEntity(position);
-        this.map.put(destination, entity);
-        return true;
-    }
-
-    @Override
     public int getHeight() {
         return this.height;
     }
@@ -60,6 +55,4 @@ public class DefaultMap implements Map {
     private boolean checkIsEmpty(Coordinate2D position){
         return !this.map.containsKey(position);
     }
-
-    
 }
