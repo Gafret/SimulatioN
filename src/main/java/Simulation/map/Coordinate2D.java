@@ -17,4 +17,8 @@ public class Coordinate2D {
     public float getDistance(Coordinate2D other) {
         return (float) Math.sqrt(Math.pow(other.getX() - x, 2) + Math.pow(other.getY() - y, 2));
     }
+    public void add(Coordinate2D other) {
+        x += other.getX();
+        y += other.getY();
+    }
 }

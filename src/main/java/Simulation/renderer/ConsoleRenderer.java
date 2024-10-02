@@ -10,7 +10,6 @@ public class ConsoleRenderer implements Renderer {
     @Override
     public void render(Map map) {
         StringBuilder builder = new StringBuilder();
-
         for(int i=0; i<map.getHeight(); i++){
             builder.setLength(0);
             for(int j=0; j<map.getWidth(); j++){
@@ -21,14 +20,14 @@ public class ConsoleRenderer implements Renderer {
                     builder.append(this.getEntitySprite(entity));
                 }
             }
-            System.out.println(builder.toString());
+            System.out.println(builder);
         }
     }
 
     private String getEntitySprite(Entity entity){
         return switch (entity.getClass().getSimpleName()){
-            case "Carnivore" -> "\uD83D\uDC3A"; // 🐺
-            case "Herbivore" -> "\uD83E\uDD8C"; // 🦌
+            case "Wolf" -> "\uD83D\uDC3A"; // 🐺
+            case "Deer" -> "\uD83E\uDD8C"; // 🦌
             case "Grass" -> "\uD83C\uDF3F"; // 🌿
             case "Rock" -> "\uD83D\uDDFF"; // 🗿
             case "Tree" -> "\uD83C\uDF33"; // 🌳
