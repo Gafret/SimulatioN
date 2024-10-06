@@ -5,8 +5,8 @@ import Simulation.entities.immobile.Tree;
 import Simulation.entities.mobile.Deer;
 import Simulation.entities.mobile.Wolf;
 import Simulation.map.Coordinate2D;
-import Simulation.map.DefaultMap;
-import Simulation.map.Map;
+import Simulation.map.DefaultSimulationMap;
+import Simulation.map.SimulationMap;
 import Simulation.renderer.ConsoleRenderer;
 import Simulation.renderer.Renderer;
 import Simulation.searchalgorithms.BreadthFirstSearch;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class RendererTests {
     Renderer r;
-    Map map;
+    SimulationMap simulationMap;
 
     private final static Entity WOLF;
     private final static Entity DEER;
@@ -89,13 +89,13 @@ public class RendererTests {
 
     @BeforeEach
     void setUp(){
-        map = new DefaultMap(2, 2);
+        simulationMap = new DefaultSimulationMap(2, 2);
     }
 
     @Test
     void Draw_empty_board(){
         String expected = "🟫🟫\r\n🟫🟫\r\n";
-        r.render(map);
+        r.render(simulationMap);
         assertEquals(expected, outContent.toString());
     }
 
@@ -107,9 +107,9 @@ public class RendererTests {
         Entity[] items = entities[currentIndex];
 
         for(int i=0; i<coordinate.length;i++){
-            map.addEntity(items[i], coordinate[i]);
+            simulationMap.addEntity(items[i], coordinate[i]);
         }
-        r.render(map);
+        r.render(simulationMap);
         assertEquals(expected, outContent.toString());
         outContent.reset();
         currentIndex++;

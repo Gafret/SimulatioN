@@ -2,7 +2,7 @@ package Simulation.entities.mobile.base;
 
 import Simulation.entities.base.Entity;
 import Simulation.map.Coordinate2D;
-import Simulation.map.Map;
+import Simulation.map.SimulationMap;
 import Simulation.searchalgorithms.SearchAlgorithm;
 
 public abstract class Creature extends Entity {
@@ -17,16 +17,16 @@ public abstract class Creature extends Entity {
         this.movementSpeed = movementSpeed;
     }
 
-    abstract public void makeMove(Coordinate2D curPos, Map map);
-    protected boolean moveTo(Coordinate2D from, Coordinate2D to, Map map){
-        Entity entity = map.getEntity(from);
+    abstract public void makeMove(Coordinate2D curPos, SimulationMap simulationMap);
+    protected boolean moveTo(Coordinate2D from, Coordinate2D to, SimulationMap simulationMap){
+        Entity entity = simulationMap.getEntity(from);
         if(!(entity instanceof Creature) ||
-                map.getEntity(to) != null ||
+                simulationMap.getEntity(to) != null ||
                 from.getDistance(to) > movementSpeed)
             return false;
 
-        map.removeEntity(from);
-        map.addEntity(entity, to);
+        simulationMap.removeEntity(from);
+        simulationMap.addEntity(entity, to);
         return true;
     }
     public boolean isDead(){

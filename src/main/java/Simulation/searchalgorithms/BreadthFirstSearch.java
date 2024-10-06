@@ -2,13 +2,13 @@ package Simulation.searchalgorithms;
 
 import Simulation.entities.base.Entity;
 import Simulation.map.Coordinate2D;
-import Simulation.map.Map;
+import Simulation.map.SimulationMap;
 
 import java.util.*;
 
 public class BreadthFirstSearch implements SearchAlgorithm{
 
-    private Coordinate2D[] getPathFromParents(java.util.Map<Coordinate2D, Coordinate2D> parents,
+    private Coordinate2D[] getPathFromParents(Map<Coordinate2D, Coordinate2D> parents,
                                                   Coordinate2D start,
                                                   Coordinate2D end){
         List<Coordinate2D> path = new ArrayList<>();
@@ -22,9 +22,9 @@ public class BreadthFirstSearch implements SearchAlgorithm{
     }
 
     @Override
-    public Coordinate2D[] findPathTo(Coordinate2D start, Class<? extends Entity> entityType, Map map) {
+    public Coordinate2D[] findPathTo(Coordinate2D start, Class<? extends Entity> entityType, SimulationMap simulationMap) {
         Queue<Coordinate2D> queue = new LinkedList<>();
-        java.util.Map<Coordinate2D, Coordinate2D> parents = new HashMap<>();
+        Map<Coordinate2D, Coordinate2D> parents = new HashMap<>();
 
         queue.add(start);
         parents.put(start, start);
@@ -39,10 +39,10 @@ public class BreadthFirstSearch implements SearchAlgorithm{
                 Coordinate2D newCoordinate = new Coordinate2D(row, column);
 
                 if(row >= 0 && column >= 0 &&
-                        row < map.getHeight() && column < map.getWidth() &&
+                        row < simulationMap.getHeight() && column < simulationMap.getWidth() &&
                         parents.get(newCoordinate) == null) {
 
-                    Entity entity = map.getEntity(newCoordinate);
+                    Entity entity = simulationMap.getEntity(newCoordinate);
 
                     if(entity != null && entity.getClass() == entityType) {
                         parents.put(newCoordinate, current);

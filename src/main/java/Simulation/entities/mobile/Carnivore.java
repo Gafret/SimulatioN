@@ -2,7 +2,7 @@ package Simulation.entities.mobile;
 
 import Simulation.entities.mobile.base.Creature;
 import Simulation.map.Coordinate2D;
-import Simulation.map.Map;
+import Simulation.map.SimulationMap;
 import Simulation.searchalgorithms.SearchAlgorithm;
 
 public class Carnivore extends Creature {
@@ -16,29 +16,29 @@ public class Carnivore extends Creature {
     }
 
     @Override
-    public void makeMove(Coordinate2D curPos, Map map) {
-        Coordinate2D[] pathToPrey = searchAlgorithm.findPathTo(curPos, Herbivore.class, map);
+    public void makeMove(Coordinate2D curPos, SimulationMap simulationMap) {
+        Coordinate2D[] pathToPrey = searchAlgorithm.findPathTo(curPos, Herbivore.class, simulationMap);
         if (pathToPrey.length == 2) {
             Coordinate2D preyPos = pathToPrey[pathToPrey.length - 1];
-            if(attackCreature(preyPos, map)){
-                consume(preyPos, map);
+            if(attackCreature(preyPos, simulationMap)){
+                consume(preyPos, simulationMap);
             }
         }
         else if(pathToPrey.length <= movementSpeed){
-            moveTo(curPos, pathToPrey[pathToPrey.length-2], map);
+            moveTo(curPos, pathToPrey[pathToPrey.length-2], simulationMap);
         } else {
-            moveTo(curPos, pathToPrey[movementSpeed-1], map);
+            moveTo(curPos, pathToPrey[movementSpeed-1], simulationMap);
         }
     }
 
-    private void consume(Coordinate2D preyPos, Map map){
-        Creature prey = (Creature) map.getEntity(preyPos);
+    private void consume(Coordinate2D preyPos, SimulationMap simulationMap){
+        Creature prey = (Creature) simulationMap.getEntity(preyPos);
         addHealth(prey.getClassHealthPoints());
-        map.removeEntity(preyPos);
+        simulationMap.removeEntity(preyPos);
     }
 
-    private boolean attackCreature(Coordinate2D preyPos, Map map){
-        Creature prey = (Creature) map.getEntity(preyPos);
+    private boolean attackCreature(Coordinate2D preyPos, SimulationMap simulationMap){
+        Creature prey = (Creature) simulationMap.getEntity(preyPos);
         prey.reduceHealth(attackDamage);
         return prey.isDead();
     }

@@ -4,7 +4,7 @@ import Simulation.entities.immobile.Grass;
 import Simulation.entities.immobile.HerbivoreFood;
 import Simulation.entities.mobile.base.Creature;
 import Simulation.map.Coordinate2D;
-import Simulation.map.Map;
+import Simulation.map.SimulationMap;
 import Simulation.searchalgorithms.SearchAlgorithm;
 
 public class Herbivore extends Creature {
@@ -14,23 +14,23 @@ public class Herbivore extends Creature {
     }
 
     @Override
-    public void makeMove(Coordinate2D curPos, Map map) {
-        Coordinate2D[] pathToVegetation = searchAlgorithm.findPathTo(curPos, Grass.class, map);
+    public void makeMove(Coordinate2D curPos, SimulationMap simulationMap) {
+        Coordinate2D[] pathToVegetation = searchAlgorithm.findPathTo(curPos, Grass.class, simulationMap);
         if (pathToVegetation.length == 2) {
             Coordinate2D vegetationPos = pathToVegetation[pathToVegetation.length - 1];
-            consume(vegetationPos, map);
+            consume(vegetationPos, simulationMap);
         }
         else if(pathToVegetation.length <= movementSpeed){
-            moveTo(curPos, pathToVegetation[pathToVegetation.length-2], map);
+            moveTo(curPos, pathToVegetation[pathToVegetation.length-2], simulationMap);
         } else {
-            moveTo(curPos, pathToVegetation[movementSpeed-1], map);
+            moveTo(curPos, pathToVegetation[movementSpeed-1], simulationMap);
         }
     }
 
-    private void consume(Coordinate2D vegetationPos, Map map){
-        HerbivoreFood vegetation = (HerbivoreFood) map.getEntity(vegetationPos);
+    private void consume(Coordinate2D vegetationPos, SimulationMap simulationMap){
+        HerbivoreFood vegetation = (HerbivoreFood) simulationMap.getEntity(vegetationPos);
         addHealth(vegetation.getHealthRestore());
-        map.removeEntity(vegetationPos);
+        simulationMap.removeEntity(vegetationPos);
     }
 
 }

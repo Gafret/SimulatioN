@@ -1,7 +1,7 @@
 package Simulation.renderer;
 
-import Simulation.map.Map;
+import Simulation.map.SimulationMap;
 
 public interface Renderer {
-    public void render(Map map);
+    public void render(SimulationMap simulationMap);
 }
