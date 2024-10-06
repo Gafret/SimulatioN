@@ -15,10 +15,11 @@ public class ConsoleRenderer implements Renderer {
             for(int j=0; j<map.getWidth(); j++){
                 Coordinate2D coord = new Coordinate2D(i, j);
                 Entity entity = map.getEntity(coord);
-                builder.append(BACKGROUND_CELL_BROWN);
                 if(entity != null){
                     builder.append(this.getEntitySprite(entity));
+                    continue;
                 }
+                builder.append(BACKGROUND_CELL_BROWN);
             }
             System.out.println(builder);
         }

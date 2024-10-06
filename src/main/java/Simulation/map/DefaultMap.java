@@ -23,6 +23,9 @@ public class DefaultMap implements Map {
     public boolean addEntity(Entity entity, Coordinate2D position) {
         if(!this.checkIsEmpty(position))
             return false;
+        if(position.getRow() < 0 || position.getRow() > width ||
+                position.getColumn() < 0 || position.getColumn() > height)
+            throw new IllegalArgumentException("Invalid position");
 
         this.map.put(position, entity);
         return true;
