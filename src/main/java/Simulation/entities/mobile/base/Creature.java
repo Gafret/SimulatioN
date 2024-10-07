@@ -15,6 +15,7 @@ public abstract class Creature extends Entity {
         this.healthPoints = healthPoints;
         this.classHealthPoints = healthPoints;
         this.movementSpeed = movementSpeed;
+        this.searchAlgorithm = searchAlgorithm;
     }
 
     abstract public void makeMove(Coordinate2D curPos, SimulationMap simulationMap);
