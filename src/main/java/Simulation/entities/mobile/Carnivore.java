@@ -17,7 +17,10 @@ public class Carnivore extends Creature {
 
     @Override
     public void makeMove(Coordinate2D curPos, SimulationMap simulationMap) {
-        Coordinate2D[] pathToPrey = searchAlgorithm.findPathTo(curPos, Herbivore.class, simulationMap);
+        Coordinate2D[] pathToPrey = searchAlgorithm.findPathTo(curPos, Creature.class, simulationMap);
+        if(pathToPrey.length == 0){
+            return;
+        }
         if (pathToPrey.length == 2) {
             Coordinate2D preyPos = pathToPrey[pathToPrey.length - 1];
             if(attackCreature(preyPos, simulationMap)){

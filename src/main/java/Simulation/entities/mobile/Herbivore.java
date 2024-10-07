@@ -16,6 +16,9 @@ public class Herbivore extends Creature {
     @Override
     public void makeMove(Coordinate2D curPos, SimulationMap simulationMap) {
         Coordinate2D[] pathToVegetation = searchAlgorithm.findPathTo(curPos, Grass.class, simulationMap);
+        if(pathToVegetation.length == 0){
+            return;
+        }
         if (pathToVegetation.length == 2) {
             Coordinate2D vegetationPos = pathToVegetation[pathToVegetation.length - 1];
             consume(vegetationPos, simulationMap);
