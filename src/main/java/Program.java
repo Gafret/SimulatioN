@@ -24,11 +24,9 @@ public class Program {
         SimulationMap map = new DefaultSimulationMap(10, 10);
         SearchAlgorithm bfs = new BreadthFirstSearch();
 
-        // int health, int movementSpeed, SearchAlgorithm searchAlgorithm
-        // int health, int movementSpeed, int attackDamage, int attackRadius, SearchAlgorithm searchAlgorithm
         Action createDeer = new AddAction(Deer.class, 2, new Class<?>[]{int.class, int.class, SearchAlgorithm.class}, new Object[]{10, 10, bfs});
-        Action createWolves = new AddAction(Wolf.class, 2, new Class<?>[]{int.class, int.class, int.class, int.class, SearchAlgorithm.class}, new Object[]{10, 10, 5, 1, bfs});
-        Action createGrass = new AddAction(Grass.class, 2, new Class<?>[]{}, new Object[]{});
+        Action createWolves = new AddAction(Wolf.class, 2, new Class<?>[]{int.class, int.class, int.class, int.class, SearchAlgorithm.class}, new Object[]{10, 10, 20, 1, bfs});
+        Action createGrass = new AddAction(Grass.class, 10, new Class<?>[]{}, new Object[]{});
         Action makeMove = new MoveAction();
 
         CompositeAction composite = new CompositeAction();
