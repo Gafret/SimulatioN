@@ -12,7 +12,10 @@ public class MoveAction implements Action {
     public void execute(SimulationMap map) {
         List<Coordinate2D> animalPositions = map.getAllEntitiesOfType(Creature.class);
         for (Coordinate2D pos : animalPositions) {
-            ((Creature) map.getEntity(pos)).makeMove(pos, map);
+            Creature animal = (Creature) map.getEntity(pos);
+            if(animal == null)
+                continue;
+            animal.makeMove(pos, map);
         }
     }
 }
