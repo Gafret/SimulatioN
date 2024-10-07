@@ -44,7 +44,7 @@ public class BreadthFirstSearch implements SearchAlgorithm{
 
                     Entity entity = simulationMap.getEntity(newCoordinate);
 
-                    if(entity != null && entity.getClass() == entityType) {
+                    if(entity != null && entityType.isAssignableFrom(entity.getClass())) {
                         parents.put(newCoordinate, current);
                         return getPathFromParents(parents, start, newCoordinate);
                     }
