@@ -23,6 +23,7 @@ public class ConsoleRenderer implements Renderer {
             }
             System.out.println(builder);
         }
+        System.out.println();
     }
 
     private String getEntitySprite(Entity entity){
