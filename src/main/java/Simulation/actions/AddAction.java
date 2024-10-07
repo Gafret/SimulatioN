@@ -24,7 +24,8 @@ public class AddAction implements Action {
     private Entity createInstance()
             throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         Constructor<? extends Entity> constructor = addTarget.getDeclaredConstructor(parameterTypes);
-        return constructor.newInstance(arguments);
+        Entity instance = constructor.newInstance(arguments);
+        return instance;
     }
 
     @Override

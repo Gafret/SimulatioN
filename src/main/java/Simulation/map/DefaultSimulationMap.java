@@ -2,10 +2,7 @@ package Simulation.map;
 
 import Simulation.entities.base.Entity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DefaultSimulationMap implements SimulationMap {
     private final Map<Coordinate2D, Entity> map = new HashMap<Coordinate2D, Entity>();
@@ -47,7 +44,7 @@ public class DefaultSimulationMap implements SimulationMap {
     public List<Coordinate2D> getAllEntitiesOfType(Class<? extends Entity> type) {
         List<Coordinate2D> result = new ArrayList<>();
         for(Map.Entry<Coordinate2D, Entity> entry : map.entrySet()){
-            if(entry.getValue().getClass().equals(type)){
+            if(type.isAssignableFrom(entry.getValue().getClass())){
                 result.add(entry.getKey());
             }
         }
@@ -56,20 +53,27 @@ public class DefaultSimulationMap implements SimulationMap {
 
     @Override
     public Coordinate2D getEmptyCell(){
+        if(isFull()){
+            throw new RuntimeException("Map is full");
+        }
+        Set<Coordinate2D> allPossibleCoordinates = new HashSet<>();
+        Set<Coordinate2D> keys = map.keySet();
         for(int i=0; i<height; i++){
             for(int j=0; j<width; j++){
-                Coordinate2D coordinate = new Coordinate2D(i, j);
-                if(!map.containsKey(coordinate)){
-                    return coordinate;
-                }
+                allPossibleCoordinates.add(new Coordinate2D(i, j));
             }
         }
-        return new Coordinate2D(-1, -1);
+        allPossibleCoordinates.removeAll(keys);
+        return allPossibleCoordinates.iterator().next();
     }
 
     @Override
     public boolean isEmpty() {
         return map.isEmpty();
+    }
+
+    public boolean isFull(){
+        return map.size() == width*height;
     }
 
     @Override
