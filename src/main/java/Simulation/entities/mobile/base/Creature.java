@@ -36,13 +36,15 @@ public abstract class Creature extends Entity {
     public int getClassHealthPoints(){
         return classHealthPoints;
     }
-    public void reduceHealth(int healthPoints){
-        if(healthPoints < 0)
+    public void reduceHealth(int damage){
+        if(damage < 0)
             throw new IllegalArgumentException("You can't reduce negative health points");
 
-        if(healthPoints > this.healthPoints)
-            this.healthPoints = 0;
-        this.healthPoints -= healthPoints;
+        if(damage > healthPoints){
+            healthPoints = 0;
+            return;
+        }
+        healthPoints -= damage;
     }
     public void addHealth(int healthPoints){
         if(healthPoints < 0)
